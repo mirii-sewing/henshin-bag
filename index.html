@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>幼稚園バッグ 裁断サイズ計算ツール</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Zen+Maru+Gothic:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <h1>幼稚園バッグ 裁断計算</h1>
+            <p class="subtitle">園指定のサイズを入れるだけで、切る大きさを自動計算！</p>
+        </header>
+
+        <main>
+            <section class="input-section">
+                <div class="card">
+                    <h2>1. 指定サイズを入力</h2>
+                    <div class="form-group row">
+                        <div class="input-field">
+                            <label for="finished_width">b (ヨコ) (cm)</label>
+                            <input type="number" id="finished_width" value="34" min="1" step="0.5">
+                            <p class="help-text">※底の横幅</p>
+                        </div>
+                        <div class="input-field">
+                            <label for="finished_height">a (タテ) (cm)</label>
+                            <input type="number" id="finished_height" value="27" min="1" step="0.5">
+                            <p class="help-text">※マチを除いた高さ</p>
+                        </div>
+                        <div class="input-field">
+                            <label for="gusset">c (マチ) (cm)</label>
+                            <input type="number" id="gusset" value="6" min="0" step="0.5">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>2. 柄に向き（上下）はありますか？</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="pattern_orientation" value="none" checked>
+                                <span>なし（底で折るタイプ）</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="pattern_orientation" value="directional">
+                                <span>あり（底で縫い合わせるタイプ）</span>
+                            </label>
+                        </div>
+                        <p class="help-text">※うさぎや車など、逆さまになると困る柄は「あり」を選んでください。</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>3. 布の切り替え（色変え）はありますか？</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="has_split" value="no" checked>
+                                <span>なし</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="has_split" value="yes">
+                                <span>あり</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="split_settings" class="form-group hidden">
+                        <label for="split_height">切り替え布の仕上がり高さ (cm)</label>
+                        <div class="input-field">
+                            <input type="number" id="split_height" value="10" min="1" step="0.5">
+                            <p class="help-text">※バッグの底から何cmを切り替えるか入力してください。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="result-section">
+                <div class="card result-card">
+                    <h2>2. 裁断サイズの結果</h2>
+                    <div id="calculation_results" class="results-grid">
+                        <!-- JSで挿入 -->
+                    </div>
+                </div>
+
+                <div class="card visual-card">
+                    <h2>3. 裁断図面（この通りに切ればOK！）</h2>
+                    <div class="canvas-container" id="diagram_container">
+                        <svg id="pattern_svg" viewBox="0 0 800 600"></svg>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2026 幼稚園バッグ裁断計算ツール | 縫い代はすべて1cmで計算しています</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
